@@ -8,6 +8,7 @@
 
 
 #define IS_IOS_DEVICE (TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE)
+#define IS_LEFT_TO_RIGHT_UI [UIView userInterfaceLayoutDirectionForSemanticContentAttribute:self.semanticContentAttribute] == UIUserInterfaceLayoutDirectionLeftToRight
 
 #if IS_IOS_DEVICE
     #import <UIKit/UIKit.h>
@@ -16,6 +17,7 @@
     #import <Foundation/Foundation.h>
     #define View NSView
 #endif
+
 
 
 @interface View (FrameAccessor)
@@ -37,6 +39,9 @@
 @property (nonatomic) CGFloat left;
 @property (nonatomic) CGFloat bottom;
 @property (nonatomic) CGFloat right;
+
+@property (nonatomic) CGFloat leading;
+@property (nonatomic) CGFloat trailing;
 
 // Center Point
 #if !IS_IOS_DEVICE

@@ -11,6 +11,8 @@
 
 @implementation View (FrameAccessor)
 
+@dynamic leading, trailing;
+
 #pragma mark Frame
 
 - (CGPoint)viewOrigin
@@ -109,9 +111,49 @@
     return self.frame.origin.x + self.frame.size.width;
 }
 
+
 - (void)setRight:(CGFloat)right
 {
     self.x = right - self.width;
+}
+
+- (CGFloat)leading
+{
+    if (IS_LEFT_TO_RIGHT_UI)
+    {
+        return self.left;
+    }
+    return self.right;
+}
+
+- (void)setLeading:(CGFloat)leading
+{
+    if (IS_LEFT_TO_RIGHT_UI)
+    {
+        self.left = leading;
+    } else
+    {
+        self.right = leading;
+    }
+    
+}
+
+- (CGFloat)trailing
+{
+    if (IS_LEFT_TO_RIGHT_UI)
+    {
+        return self.right;
+    }
+    return self.left;
+}
+
+- (void)setTrailing:(CGFloat)trailing
+{
+    if (IS_LEFT_TO_RIGHT_UI) {
+        self.right = trailing;
+    } else {
+        self.left = trailing;
+    }
 }
 
 - (CGFloat)top
